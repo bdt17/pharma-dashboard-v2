@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: pharma-app-v2
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://pharma-api-brax.onrender.com/api/v1
