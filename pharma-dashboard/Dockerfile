@@ -8,4 +8,5 @@ RUN gem install bundler && bundle install
 COPY . .
 
 EXPOSE 3000
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
+CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+
