@@ -11,7 +11,7 @@ function App() {
 
   const fetchBatches = async () => {
     try {
-      const res = await axios.get('https://pharma-api-brax.onrender.com/api/v1/batches');
+      const res = await axios.get('https://pharma-api-brax.onrender.com/batches');
       setBatches(res.data);
     } catch (error) {
       console.error('API Error:', error);
