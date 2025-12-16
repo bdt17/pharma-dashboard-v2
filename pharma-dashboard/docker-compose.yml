@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  pharma-db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: pharma_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pharma-dashboard:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pharma-db
+    environment:
+      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@pharma-db:5432/pharma_development
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
