@@ -1,1 +1,15 @@
-[{"id":1,"lot_number":"LOT1001","temperature":2.3,"status":"ON TRACK","truck_id":"TRK456","location":"Warehouse 1 → DC 2","timestamp":"2025-12-15T18:00:00Z"},{"id":2,"lot_number":"LOT1002","temperature":5.7,"status":"TEMP ALERT","truck_id":"TRK789","location":"Warehouse 2 → DC 1","timestamp":"2025-12-15T18:01:00Z"},{"id":3,"lot_number":"LOT1003","temperature":3.1,"status":"ON TRACK","truck_id":"TRK123","location":"Warehouse 3 → DC 3","timestamp":"2025-12-15T18:02:00Z"},{"id":4,"lot_number":"LOT1004","temperature":6.8,"status":"TEMP ALERT","truck_id":"TRK234","location":"Warehouse 1 → DC 4","timestamp":"2025-12-15T18:03:00Z"},{"id":5,"lot_number":"LOT1005","temperature":4.2,"status":"ON TRACK","truck_id":"TRK567","location":"Warehouse 2 → DC 5","timestamp":"2025-12-15T18:04:00Z"}]
+#!/usr/bin/env ruby
+require 'rack'
+
+app = proc do |env|
+  case env['PATH_INFO']
+  when '/' 
+    [200, {'Content-Type' => 'text/plain'}, ['FDA PHARMA API v6 LIVE']]
+  when '/batches'
+    [200, {'Content-Type' => 'application/json'}, ['[{"id":1,"lot":"LOT1001","temp":2.3,"status":"OK","truck":"TRK456"},{"id":2,"lot":"LOT1002","temp":5.7,"status":"ALERT","truck":"TRK789"},{"id":3,"lot":"LOT1003","temp":3.1,"status":"OK","truck":"TRK123"},{"id":4,"lot":"LOT1004","temp":6.8,"status":"ALERT","truck":"TRK234"},{"id":5,"lot":"LOT1005","temp":4.2,"status":"OK","truck":"TRK567"}]']]
+  else
+    [404, {'Content-Type' => 'text/plain'}, ['Not Found']]
+  end
+end
+
+run app
