@@ -29,7 +29,7 @@ function App() {
       </h1>
       
       <div className="max-w-4xl mx-auto space-y-6">
-        {batches.map(batch => (
+        {batches.filter(b => b.warehouse === "A" || warehouseFilter === "all").map(batch => (
           <div key={batch.id} className="bg-white p-8 rounded-2xl shadow-xl border-l-8 border-blue-500 hover:shadow-2xl transition-all">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div>
