@@ -1,13 +1,7 @@
 <h1>Pharma Products</h1>
-<%= link_to 'New Product', new_product_path %>
-
-<table border="1" style="border-collapse:collapse">
-  <tr><th>Name</th><th>Price</th><th>Description</th></tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.name %></td>
-      <td>$<%= product.price %></td>
-      <td><%= product.description %></td>
-    </tr>
-  <% end %>
+<a href="/products/new">New Product</a>
+<table border=1>
+<% @products.each do |p| %>
+  <tr><td><%= p.name %></td><td>$<%= p.price %></td></tr>
+<% end %>
 </table>
