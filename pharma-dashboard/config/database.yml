@@ -87,18 +87,20 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: pharma_dashboard_production
-    username: pharma_dashboard
+    database: pharma_transport_db_v0vi                    # ← Match Render DB
+    username: pharma_transport_db_v0vi_user               # ← Match Render user
     password: <%= ENV["PHARMA_DASHBOARD_DATABASE_PASSWORD"] %>
+    host: dpg-d4qk06ur433s738a3dc0-a.oregon-postgres.render.com  # ← ADD!
+    port: 5432                                           # ← ADD!
   cache:
     <<: *primary_production
-    database: pharma_dashboard_production_cache
+    database: pharma_transport_db_v0vi_cache              # ← Match Render
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: pharma_dashboard_production_queue
+    database: pharma_transport_db_v0vi_queue              # ← Match Render
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: pharma_dashboard_production_cable
+    database: pharma_transport_db_v0vi_cable              # ← Match Render
     migrations_paths: db/cable_migrate
