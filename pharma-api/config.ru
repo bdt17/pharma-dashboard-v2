@@ -8,3 +8,9 @@ run ->(env) {
   else [404, {'Content-Type' => 'text/plain'}, ["Not Found"]]
   end
 }
+map "/tickets" do
+  run ->(env) { [200, {'Content-Type' => 'application/json'}, [BATCHES[0..10].map { |b| {id: b[:id], batch: b[:lot_number], status: "open"} }.to_json]] }
+end
+map "/pricing" do
+  run ->(env) { [200, {'Content-Type' => 'application/json'}, [[{"plan": "Enterprise", "price": "$999/mo", "batches": "Unlimited"}].to_json]] }
+end
