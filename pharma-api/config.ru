@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'rack'
 require_relative './batches_50'
 run ->(env) {
