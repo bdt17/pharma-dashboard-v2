@@ -9,3 +9,8 @@ default: &default
 
 development:
   <<: *default
+  database: pharma_dashboard_development
+  username: postgres
+  password: password
+  host: localhost  #n changed 
+  port: 5432
