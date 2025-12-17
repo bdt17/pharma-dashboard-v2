@@ -1,0 +1,48 @@
+name: CI Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: pharma_dashboard_development
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Install API deps
+        run: cd pharma-api && npm ci
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with: { ruby-version: '3.2', bundler-cache: true }
+        working-directory: pharma-dashboard
+      - name: Migrate DB
+        run: cd pharma-dashboard && rails db:migrate
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            if pg_isready -h localhost -p 5432 -U postgres; then
+              echo "Postgres ready!"
+              break
+            fi
+            sleep 1
+          done
+      - name: Start API
+        run: cd pharma-api && PORT=3001 npm run dev &
+      - name: Run tests
+        run: |
+          sleep 10
+          pkill -f "npm run dev" || true
+          ./test_all_pharma.sh
