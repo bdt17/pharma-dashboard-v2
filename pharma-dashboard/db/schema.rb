@@ -10,8 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_18_015132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "location_points", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "recorded_at"
+    t.float "speed"
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_id", null: false
+    t.index ["vehicle_id"], name: "index_location_points_on_vehicle_id"
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.float "current_latitude"
+    t.float "current_longitude"
+    t.string "identifier"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "location_points", "vehicles"
 end
