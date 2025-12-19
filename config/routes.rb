@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :drivers
-
   get "up" => "rails/health#show", as: :rails_health_check
   root "dashboard#index"
 
-  namespace :drivers do
-    get :dashboard, to: "dashboard#index"
-  end
+  # DRIVER ROUTES - COMPLETE
+  get '/drivers/sign_up', to: 'drivers#new'
+  post '/drivers', to: 'drivers#create'
+  get '/drivers/dashboard', to: 'drivers#dashboard', as: :drivers_dashboard
+  post '/drivers/checkin', to: 'drivers#checkin', as: :drivers_checkin
 end

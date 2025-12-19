@@ -1,6 +1,5 @@
 class Driver < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  # Devise already handles password (uses encrypted_password)
+  validates :name, :phone_number, :email, presence: true
+  validates :email, uniqueness: true
 end
