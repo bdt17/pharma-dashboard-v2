@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "admin/index"
   get "vehicles/index"
   get "up" => "rails/health#show", as: :rails_health_check
 get '/api/vehicles', to: 'vehicles#index'
@@ -16,3 +17,4 @@ namespace :api do
   post '/locations', to: 'locations#create'
 end
 mount ActionCable.server => '/cable'
+root 'admin#index'
