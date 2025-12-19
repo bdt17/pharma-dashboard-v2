@@ -200,7 +200,7 @@
       <% end %>
     }
   </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWM9oe_9Cvmh30pguQtq8n8TbM_orUiC8&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
 
   <script>
     // Auto-refresh every 10 seconds
