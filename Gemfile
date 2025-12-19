@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.1"
 # Use postgresql as the database for Active Record
@@ -58,3 +59,4 @@ group :test do
 end
 gem 'chartkick'
 gem 'groupdate'
+gem 'devise'
