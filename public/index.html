@@ -1,46 +1,12 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>🚚 PharmaTransport FDA Dashboard</title>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pharma GPS Dashboard</title>
 </head>
 <body>
-  <h1>🚚 PharmaTransport Live GPS Dashboard</h1>
-  <div id="map" style="height: 400px; border: 1px solid #ccc;"></div>
-  <div id="stats"></div>
-  <canvas id="tempChart" width="400" height="200"></canvas>
-
-  <script>
-    const API_URL = 'https://pharma-api-abc123.onrender.com/api/shipments';
-    
-    function updateDashboard() {
-      fetch(API_URL)
-        .then(r => r.json())
-        .then(data => {
-          console.log('Live trucks:', data);
-          
-          // Update map
-          const map = L.map('map').setView([37.7749, -122.4194], 10);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-          data.forEach(s => {
-            L.marker([s.lat, s.lng]).addTo(map)
-              .bindPopup(`IMEI: ${s.imei}<br>Temp: ${s.temp}°C<br>Status: ${s.status}`);
-          });
-          
-          // Update stats
-          document.getElementById('stats').innerHTML = `
-            <p>🚚 Trucks tracked: ${data.length}</p>
-            <p>🌡️ Avg temp: ${data.reduce((a,b)=>a+b.temp,0)/data.length?.toFixed(1)}°C</p>
-          `;
-        })
-        .catch(err => console.error('API error:', err));
-    }
-    
-    // Live refresh every 30s
-    updateDashboard();
-    setInterval(updateDashboard, 30000);
-  </script>
+  <div id="root"></div>
 </body>
 </html>
