@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
+get '/api/vehicles', to: 'vehicles#index'
   root "dashboard#index"
 
   # DRIVER ROUTES - COMPLETE
