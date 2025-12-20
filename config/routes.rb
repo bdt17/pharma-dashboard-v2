@@ -4,3 +4,4 @@ resources :geofences
   resources :vehicles
   get '/update_gps', to: 'vehicles#update_gps'
 end
+get '/landing', to: 'home#landing'
