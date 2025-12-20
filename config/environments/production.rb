@@ -4,6 +4,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+config.cache_store = :memory_store
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -88,3 +90,4 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
+  config.cache_store = :memory_store
