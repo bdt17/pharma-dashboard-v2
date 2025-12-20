@@ -15,3 +15,7 @@ end
   def index
     render json: Vehicle.all
   end
+
+  def index
+    render json: Vehicle.all
+  end

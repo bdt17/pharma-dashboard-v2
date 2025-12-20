@@ -11,3 +11,4 @@ Rails.application.routes.draw do
 end
 get "/vehicles/update_gps", to: "vehicles#update_gps"
 get "/vehicles", to: "vehicles#index"
+get "/vehicles", to: "vehicles#index"
