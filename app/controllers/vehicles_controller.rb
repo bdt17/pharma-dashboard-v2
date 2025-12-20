@@ -1,10 +1,17 @@
 class VehiclesController < ApplicationController
-  def index
-    vehicles = [
-      {id: 1, name: "F-150", lat: 33.44, lng: -112.07, status: "Phoenix → Tucson"},
-      {id: 2, name: "Transit", lat: 32.22, lng: -110.97, status: "Tucson → Hospital"},
-      {id: 3, name: "Box Truck", lat: 33.45, lng: -112.06, status: "Local delivery"}
-    ]
-    render json: vehicles
+def update_gps
+  Vehicle.all.each do |v|
+    v.update!(
+      latitude: v.latitude + rand(-0.001..0.001),
+      longitude: v.longitude + rand(-0.001..0.001)
+    )
   end
+  render json: Vehicle.all
 end
+
+
+end
+
+  def index
+    render json: Vehicle.all
+  end
