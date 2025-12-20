@@ -1,41 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pharma GPS LIVE</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body>
-  <h1>🚚 Pharma GPS Dashboard - LIVE TRACKING</h1>
-  <p>Vehicles: <%= Vehicle.count rescue 0 %></p>
-  <div id="map" style="height: 500px; border: 1px solid #ccc;"></div>
+<h1>🚚 Pharma GPS Dashboard - LIVE TRACKING</h1>
+<p>Vehicles: <span id="count">Loading...</span> | <button onclick="updateGPS()">🔄 Update GPS</button></p>
 
-  <script>
-    var map = L.map('map').setView([33.4484, -112.0740], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    
-    window.markers = {};
-    
-    // Load initial vehicles
-    fetch('/vehicles').then(r=>r.json()).then(vehicles => {
-      vehicles.forEach(v => {
-        window.markers[v.id] = L.marker([v.latitude, v.longitude])
-          .addTo(map)
-          .bindPopup(v.name + ' 💉')
-          .openPopup();
-      });
-    });
+<div id="map" style="height: 600px; border: 2px solid #007bff;"></div>
 
-    // LIVE GPS updates every 10s
-    setInterval(() => {
-      fetch("/vehicles/update_gps").then(r=>r.json()).then(vehicles => {
-        vehicles.forEach(v => {
-          if(window.markers[v.id]) {
-            window.markers[v.id].setLatLng([v.latitude, v.longitude]);
-          }
-        });
-      });
-    }, 10000);
-  </script>
-</body>
-</html>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+let map, markers = {};
+
+map = L.map('map').setView([35, -113], 7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap | Pharma GPS Tracking'
+}).addTo(map);
+
+async function loadVehicles() {
+  const res = await fetch('/vehicles');
+  const vehicles = await res.json();
+  
+  document.getElementById('count').textContent = vehicles.length;
+  
+  vehicles.forEach(v => {
+    if (markers[v.id]) markers[v.id].setLatLng([v.latitude, v.longitude]);
+    else {
+      markers[v.id] = L.marker([v.latitude, v.longitude], {
+        icon: L.divIcon({
+          className: 'pharma-truck',
+          html: '🚚<div>' + v.name + '</div>',
+          iconSize: [60, 40]
+        })
+      }).addTo(map).bindPopup(`
+        <b>${v.name}</b><br>
+        📍 ${v.latitude.toFixed(4)}, ${v.longitude.toFixed(4)}
+      `);
+    }
+  });
+  
+  if (vehicles.length) map.fitBounds(Object.values(markers).map(m => m.getLatLng()));
+}
+
+async function updateGPS() {
+  await fetch('/update_gps');
+  loadVehicles();
+}
+
+// LIVE UPDATE EVERY 10s!
+setInterval(loadVehicles, 10000);
+loadVehicles();
+</script>
+
+<style>
+.pharma-truck { background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+#map { border-radius: 10px; }
+</style>
