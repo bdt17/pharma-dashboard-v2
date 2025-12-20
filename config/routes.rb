@@ -6,3 +6,4 @@ Rails.application.routes.draw do
   
   resources :vehicles
 end
+get '/update_gps', to: 'vehicles#update_gps'
