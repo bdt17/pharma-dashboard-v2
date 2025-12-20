@@ -1,4 +1,5 @@
-Vehicle.delete_all
-Vehicle.create!(name: 'Pharma Truck AZ-101 💉', latitude: 33.4484, longitude: -112.0740)
-Vehicle.create!(name: 'Pharma Van NV-202 💉', latitude: 36.1699, longitude: -115.1398)
-puts "✅ SEEDED #{Vehicle.count} vehicles"
+Vehicle.destroy_all
+%w[AZ-101 NV-202 CA-303 TX-404 FL-505 NY-606 IL-707 WA-808 AZ-909 NV-010].each_with_index do |name, i|
+  Vehicle.create!(name: name, latitude: 33.4 + i*0.1, longitude: -112.0 + i*0.05)
+end
+puts "Added #{Vehicle.count} trucks"
