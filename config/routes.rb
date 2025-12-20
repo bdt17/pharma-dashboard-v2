@@ -16,4 +16,3 @@ end
 # Pricing page
 
 # Pricing enterprise page
-get '/pricing', to: 'pricing#index'
