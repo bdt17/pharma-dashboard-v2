@@ -11,3 +11,4 @@ Rails.application.routes.draw do
   resources :geofences
 end
 get '/pricing', to: 'pricing#index'
+get '/pricing', to: 'pricing#index'
