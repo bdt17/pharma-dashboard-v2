@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_21_053326) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,12 +48,27 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_053326) do
   end
 
   create_table "sensor_readings", force: :cascade do |t|
+    t.string "calibration_cert_url"
     t.datetime "created_at", null: false
     t.float "humidity"
+    t.boolean "nist_traceable"
+    t.jsonb "raw_payload"
+    t.string "source"
     t.float "temperature"
     t.datetime "updated_at", null: false
     t.bigint "vehicle_id", null: false
     t.index ["vehicle_id"], name: "index_sensor_readings_on_vehicle_id"
+  end
+
+  create_table "signatures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "document_id"
+    t.string "document_type"
+    t.string "signature_hash"
+    t.string "signature_method"
+    t.datetime "signed_at"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -73,6 +88,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_053326) do
     t.float "latitude"
     t.float "longitude"
     t.string "name"
+    t.string "status"
     t.datetime "updated_at", null: false
   end
 

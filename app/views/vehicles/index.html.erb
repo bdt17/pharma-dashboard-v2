@@ -1,13 +1,12 @@
-<div class="container mt-5">
-  <h1>Vehicles List</h1>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5>Truck #1</h5>
-          <a href="/vehicles/1/map" class="btn btn-primary">Live Map</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>🚚 Vehicles (Live GPS Tracking)</h1>
+<table class="table">
+  <tr><th>ID</th><th>Name</th><th>Status</th><th>GPS</th></tr>
+  <% @vehicles.each do |v| %>
+    <tr>
+      <td><%= v.id %></td>
+      <td><%= v.name %></td>
+      <td><span class="badge bg-success"><%= v.status %></span></td>
+      <td><%= v.latitude %>, <%= v.longitude %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,5 +1,5 @@
-Vehicle.destroy_all
-%w[AZ-101 NV-202 CA-303 TX-404 FL-505 NY-606 IL-707 WA-808 AZ-909 NV-010].each_with_index do |name, i|
-  Vehicle.create!(name: name, latitude: 33.4 + i*0.1, longitude: -112.0 + i*0.05)
-end
-puts "Added #{Vehicle.count} trucks"
+Vehicle.find_or_create_by(name: 'Truck 1', latitude: 33.4484, longitude: -112.0740, status: 'active')
+Vehicle.find_or_create_by(name: 'Truck 2', latitude: 33.4500, longitude: -112.0700, status: 'active')
+SensorReading.find_or_create_by(vehicle_id: 1, temperature: 4.2, humidity: 45.0)
+SensorReading.find_or_create_by(vehicle_id: 2, temperature: 5.1, humidity: 52.0)
+AuditEvent.find_or_create_by(action: 'temperature_recorded', record_type: 'SensorReading', ip_address: '127.0.0.1')

@@ -1,47 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Pharma Transport All" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Pharma Transport All">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <!-- BOOTSTRAP 5 CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="/">🚚 Pharma Transport</a>
-    <div class="navbar-nav">
-      <a class="nav-link" href="/dashboard">Dashboard</a>
-      <a class="nav-link" href="/vehicles/1/map">Live Map</a>
-      <a class="nav-link" href="#">Alerts</a>
-      <a class="nav-link" href="#">Reports</a>
+<head>
+  <title>Pharma Transport $23K ARR</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">🚚 Pharma Transport</a>
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="/vehicles">Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="/audit_events">FDA Audit</a></li>
+        <li class="nav-item"><a class="nav-link" href="/geofences">Geofences</a></li>
+        <li class="nav-item"><a class="nav-link" href="/sensor_readings">Cold Chain</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/users/sign_in">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="/users/sign_up">Sign Up</a></li>
+      </ul>
     </div>
-  </div>
-</nav>
-
-
-
+  </nav>
+  <div class="container mt-4">
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>

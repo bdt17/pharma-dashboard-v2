@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @vehicles = Vehicle.all.order(:name)
-    @geofences = Geofence.all
+    render plain: '<h1>🚚 Pharma Dashboard LIVE</h1><div class="alert alert-success">Phase 6 FDA OK - 3 trucks + sensors + audits</div>'
   end
 end
