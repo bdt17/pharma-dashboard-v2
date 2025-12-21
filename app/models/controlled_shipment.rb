@@ -1,0 +1,2 @@
+class ControlledShipment < ApplicationRecord
+end

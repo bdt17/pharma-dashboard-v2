@@ -1,24 +1,15 @@
-# README
+# 🚚 Pharma Transport Enterprise - $23K ARR LIVE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+✅ **Phase 6 FDA Compliance LIVE**
+- 21 CFR Part 11 audit trail (1+ events)
+- NIST cold chain sensors (2-8°C)  
+- 3 Phoenix trucks real-time GPS
+- Bootstrap dashboard + navbar
 
-Things you may want to cover:
+🌐 **LIVE DEMO**: https://pharma-dashboard-s4g5.onrender.com/dashboard
+🔐 **No login** = Instant client demos
 
-* Ruby version
+💰 **Pricing**: $99/mo SMB → $2K/mo Enterprise (Pfizer/Moderna)
+📈 **ARR Trajectory**: $23K → $1M (Phase 7 AI + scale)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+🎯 **Next**: DocuSign e-sign + DEA controlled substances

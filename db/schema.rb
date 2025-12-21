@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_21_214842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
     t.datetime "created_at", null: false
     t.jsonb "metadata"
     t.integer "resource_id"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "controlled_shipments", force: :cascade do |t|
+    t.jsonb "chain_of_custody"
+    t.datetime "created_at", null: false
+    t.string "dea_number"
+    t.string "dea_schedule"
+    t.boolean "signature_required"
     t.datetime "updated_at", null: false
   end
 
@@ -35,6 +44,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_drivers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_drivers_on_reset_password_token", unique: true
+  end
+
+  create_table "electronic_signatures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "document_id"
+    t.string "document_type"
+    t.string "docusign_envelope_id"
+    t.string "signature_hash"
+    t.datetime "signed_at"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_electronic_signatures_on_user_id"
   end
 
   create_table "geofences", force: :cascade do |t|
@@ -71,6 +92,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
     t.integer "user_id"
   end
 
+  create_table "transport_anomalies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "detected_at"
+    t.boolean "geofence_breach"
+    t.string "severity"
+    t.boolean "temperature_spike"
+    t.boolean "theft_route"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
@@ -92,5 +123,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_21_210817) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "electronic_signatures", "users"
   add_foreign_key "sensor_readings", "vehicles"
 end

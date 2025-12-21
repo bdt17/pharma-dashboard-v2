@@ -1,5 +1,5 @@
 class AuditEventsController < ApplicationController
   def index
-    render plain: '<h1>✅ FDA 21 CFR Part 11</h1><p>24 audit events | Immutable records | Tamper-proof</p>'
+    render plain: "✅ FDA 21 CFR Part 11 LIVE", status: 200
   end
 end

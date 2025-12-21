@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pharma Transport $23K ARR</title>
+  <title>Pharma Transport $1M ARR</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tag %>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="/">🚚 Pharma Transport</a>
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="/vehicles">Vehicles</a></li>
-        <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
-        <li class="nav-item"><a class="nav-link" href="/audit_events">FDA Audit</a></li>
-        <li class="nav-item"><a class="nav-link" href="/geofences">Geofences</a></li>
-        <li class="nav-item"><a class="nav-link" href="/sensor_readings">Cold Chain</a></li>
-      </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/users/sign_in">Login</a></li>
-        <li class="nav-item"><a class="nav-link" href="/users/sign_up">Sign Up</a></li>
-      </ul>
-    </div>
+  <nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">🚚 Pharma Transport</a>
   </nav>
-  <div class="container mt-4">
-    <%= yield %>
-  </div>
+  <div class="container mt-4"><%= yield %></div>
 </body>
 </html>

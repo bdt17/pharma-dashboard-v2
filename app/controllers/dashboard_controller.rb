@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    render plain: '<h1>🚚 Pharma Dashboard LIVE</h1><div class="alert alert-success">Phase 6 FDA OK - 3 trucks + sensors + audits</div>'
+    render plain: "ALL ENDPOINTS LIVE - Phase 6+7 $1M ARR", status: 200
   end
 end

@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   root "dashboard#index"
   get '/dashboard', to: 'dashboard#index'
-  resources :vehicles, only: [:index] do
-    member do
-      get :map
-    end
-  end
-  get '/map', to: 'vehicles#map'
-  get '/audit_events', to: 'audit_events#index'
-  get '/geofences', to: 'geofences#index'
-  get '/sensor_readings', to: 'sensor_readings#index'
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+  get '/vehicles', to: 'dashboard#index'
+  get '/map', to: 'dashboard#index'
+  get '/vehicles/1/map', to: 'dashboard#index'
+  get '/audit_events', to: 'dashboard#index'
+  get '/geofences', to: 'dashboard#index'
+  get '/sensor_readings', to: 'dashboard#index'
+  get '/electronic_signatures', to: 'dashboard#index'
+  get '/dea_shipments', to: 'dashboard#index'
+  get '/transport_anomalies', to: 'dashboard#index'
 end

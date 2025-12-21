@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  temperature_spike: false
+  geofence_breach: false
+  theft_route: false
+  detected_at: 2025-12-21 14:48:42
+  severity: MyString
+
+two:
+  temperature_spike: false
+  geofence_breach: false
+  theft_route: false
+  detected_at: 2025-12-21 14:48:42
+  severity: MyString

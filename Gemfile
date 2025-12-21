@@ -30,3 +30,6 @@ end
 group :development do
   gem "web-console"
 end
+gem 'docusign_esign'
+gem 'redis', '~> 5.0'
+gem 'web-console', group: :development
