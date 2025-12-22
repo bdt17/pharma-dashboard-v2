@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "reports/pdf"
+  get "billing/index"
+  get "billing/new"
+  get "billing/create"
   namespace :api do
     namespace :v1 do
       get "realtime/index"
