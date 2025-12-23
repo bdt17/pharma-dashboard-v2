@@ -1,4 +1,6 @@
 class SensorsController < ApplicationController
+  skip_before_action :verify_authenticity_token  # ← API FIX
+
   def index
     render json: [{id:1,truck_id:1,temperature:4.2,"PHARMA":"TRUCK SENSORS 🚚 FDA"}]
   end
