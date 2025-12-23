@@ -10,4 +10,10 @@ Rails.application.routes.draw do
   get 'pfizer', to: 'partners#pfizer'
   resources :sensors
   resources :partners
+
+get '/api/gps/:id', to: 'sensors#gps'           # Phase 14 GPS
+get '/api/subscribe', to: 'sensors#subscribe'  # Phase 14 Stripe
+get '/api/jetson', to: 'sensors#jetson'        # Phase 14 Vision
+
+
 end
