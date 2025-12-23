@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "health/up"
+  get "health/status"
   get "partners/pfizer"
   get "subscriptions/new"
   get "subscriptions/create"
