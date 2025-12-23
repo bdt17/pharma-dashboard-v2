@@ -206,9 +206,17 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
+    redis-client (0.26.2)
+      connection_pool
     reline (0.6.3)
       io-console (~> 0.5)
     securerandom (0.4.1)
+    sidekiq (8.1.0)
+      connection_pool (>= 3.0.0)
+      json (>= 2.16.0)
+      logger (>= 1.7.0)
+      rack (>= 3.2.0)
+      redis-client (>= 0.26.0)
     stringio (3.2.0)
     stripe (18.1.0)
     thor (1.4.0)
@@ -243,6 +251,7 @@ DEPENDENCIES
   puma (>= 5.0)
   pundit (~> 2.5)
   rails (~> 8.1.1)
+  sidekiq (~> 8.1)
   stripe (~> 18.1)
   tzinfo-data
 
@@ -321,8 +330,10 @@ CHECKSUMS
   railties (8.1.1) sha256=fb0c7038b147bea41bf6697fa443ff1c5c47d3bb1eedd9ecf1bceeb90efcb868
   rake (13.3.1) sha256=8c9e89d09f66a26a01264e7e3480ec0607f0c497a861ef16063604b1b08eb19c
   rdoc (7.0.1) sha256=7ae1540c54eb8174f6549440dd2299276eac51deaa7d80ea7db9ea5b96559f53
+  redis-client (0.26.2) sha256=1336fb5a7202d398b719531853c184b7c9cbdcace1f00f8356062b9dfba6779b
   reline (0.6.3) sha256=1198b04973565b36ec0f11542ab3f5cfeeec34823f4e54cebde90968092b1835
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
+  sidekiq (8.1.0) sha256=6bde5eaee9e4d7b1121e97ebd585273627fb32b1f870a47893723572479ad1e4
   stringio (3.2.0) sha256=c37cb2e58b4ffbd33fe5cd948c05934af997b36e0b6ca6fdf43afa234cf222e1
   stripe (18.1.0) sha256=5f776fb65db442f1ba7401dc100945a2852b3714103c9aac27fa93fb33e2ee72
   thor (1.4.0) sha256=8763e822ccb0f1d7bee88cde131b19a65606657b847cc7b7b4b82e772bcd8a3d
