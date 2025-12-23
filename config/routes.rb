@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+.Rails.application.routes.draw do
   get "subscriptions/new"
   get "subscriptions/create"
   root "dashboard#index"
@@ -13,3 +13,10 @@ end
 resources :subscriptions, only: [:new, :create]
 resources :subscriptions, only: [:new, :create]
 get '/api/sensors', to: 'sensors#index'
+
+resources :subscriptions, only: [:new, :create]
+get 'upgrade', to: 'subscriptions#new'
+
+
+resources :subscriptions, only: [:new, :create]
+get 'upgrade', to: 'subscriptions#new'

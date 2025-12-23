@@ -19,6 +19,22 @@
     <div class="card bg-warning text-white p-3">
       <h3>23 Shipments</h3><small>Active</small>
     </div>
+
+
+<div class="row mt-4">
+  <div class="col-12">
+    <% unless current_user&.organization&.active_subscription? %>
+      <a href="/upgrade" class="btn btn-primary btn-lg w-100">
+        🚀 Upgrade Enterprise → $99/mo Stripe Billing
+      </a>
+    <% else %>
+      <div class="alert alert-success">
+        ✅ Enterprise Active - Phase 10 AI/ML LIVE
+      </div>
+    <% end %>
+  </div>
+</div>
+
   </div>
 </div>
 <div class="alert alert-success mt-4">✅ Phase 6 FDA Compliance LIVE</div>
