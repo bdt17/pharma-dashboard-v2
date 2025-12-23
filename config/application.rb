@@ -23,6 +23,16 @@ module PharmaTransportAll
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+module PharmaTransport
+  class Application < Rails::Application
+    # ... existing config ...
+    
+    config.exceptions_app = self.routes  # ← CORRECT LOCATION
+  end
+end
+
+
   end
 end
 require_relative '../app/middleware/security_middleware'
+
