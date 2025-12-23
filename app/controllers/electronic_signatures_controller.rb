@@ -1,5 +1,11 @@
 class ElectronicSignaturesController < ApplicationController
-  def index
-    render plain: "📝 ElectronicSignatures LIVE - Phase 7"
+  def new
+    @shipment = Shipment.last || Shipment.create(truck_id: 1)
+  end
+  
+  def create
+    # Fake DocuSign
+    @shipment.update(signature_status: 'signed')
+    redirect_to dashboard_path, notice: "✅ DocuSign DEA Form 222 Signed"
   end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "partners/pfizer"
   get "subscriptions/new"
   get "subscriptions/create"
   root "dashboard#index"
@@ -14,3 +15,6 @@ Rails.application.routes.draw do
   get 'upgrade', to: 'subscriptions#new'
   get '/api/sensors', to: 'sensors#index'
 end
+
+
+get 'pfizer', to: 'partners#pfizer'
