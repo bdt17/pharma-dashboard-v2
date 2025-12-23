@@ -1,19 +1,16 @@
 class Vehicle < ApplicationRecord
-  after_create :check_geofences
-has_many :locations, -> { order(created_at: :desc) }
+  belongs_to :organization
+  has_many :sensor_readings, dependent: :destroy
+  has_many :locations, -> { order(created_at: :desc) }
 
-  def check_geofences
-return unless latitude.present? && longitude.present?
-    Geofence.find_each do |zone|
-      # Haversine approx for Phoenix Depot (33.4484, -112.0740)
-      distance = Math.sqrt(
-        (latitude - 33.4484)**2 + (longitude + 112.0740)**2
-      ) * 111.0  # km
-      
-      if distance < 0.5  # 500m radius
-        AlertJob.perform_later(self, zone, :entry)
-        puts "🚨 GEOFENCE: #{name} → #{zone.name}"
-      end
-    end
+  # Phase 10+ Tamper Detection
+  def detect_tamper(vibration, light)
+    score = (vibration > 2.0 || light > 50) ? 0.9 : 0.1
+    Rails.logger.info "🚨 TAMPER SCORE: #{score} (vib:#{vibration}, light:#{light})"
+    { 
+      score: score, 
+      status: score > 0.5 ? '🚨 ALERT' : '✅ OK',
+      vehicle: name
+    }
   end
 end

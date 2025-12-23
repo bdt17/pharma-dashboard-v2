@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_22_002316) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_23_204209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_002316) do
   create_table "dea_shipments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "demand_forecasts", force: :cascade do |t|
+    t.float "confidence"
+    t.datetime "created_at", null: false
+    t.datetime "forecast_date"
+    t.bigint "organization_id", null: false
+    t.float "predicted_temp"
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_id", null: false
+    t.index ["organization_id"], name: "index_demand_forecasts_on_organization_id"
+    t.index ["vehicle_id"], name: "index_demand_forecasts_on_vehicle_id"
   end
 
   create_table "drivers", force: :cascade do |t|
@@ -97,6 +109,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_002316) do
     t.jsonb "raw_payload"
     t.string "source"
     t.float "temperature"
+    t.datetime "timestamp"
     t.datetime "updated_at", null: false
     t.bigint "vehicle_id", null: false
     t.index ["vehicle_id"], name: "index_sensor_readings_on_vehicle_id"
@@ -119,6 +132,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_002316) do
     t.decimal "price"
     t.string "status"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tamper_events", force: :cascade do |t|
+    t.float "anomaly_score"
+    t.datetime "created_at", null: false
+    t.float "light_exposure"
+    t.bigint "organization_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_id", null: false
+    t.float "vibration"
+    t.index ["organization_id"], name: "index_tamper_events_on_organization_id"
+    t.index ["vehicle_id"], name: "index_tamper_events_on_vehicle_id"
   end
 
   create_table "transport_anomalies", force: :cascade do |t|
@@ -152,6 +178,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_002316) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "demand_forecasts", "organizations"
+  add_foreign_key "demand_forecasts", "vehicles"
   add_foreign_key "electronic_signatures", "users"
   add_foreign_key "sensor_readings", "vehicles"
+  add_foreign_key "tamper_events", "organizations"
+  add_foreign_key "tamper_events", "vehicles"
 end

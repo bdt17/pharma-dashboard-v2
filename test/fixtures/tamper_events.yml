@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  vehicle: one
+  vibration: 1.5
+  light_exposure: 1.5
+  anomaly_score: 1.5
+  status: MyString
+
+two:
+  organization: two
+  vehicle: two
+  vibration: 1.5
+  light_exposure: 1.5
+  anomaly_score: 1.5
+  status: MyString

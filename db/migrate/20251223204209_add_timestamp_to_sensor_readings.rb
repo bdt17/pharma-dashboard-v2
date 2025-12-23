@@ -1,0 +1,5 @@
+class AddTimestampToSensorReadings < ActiveRecord::Migration[8.1]
+  def change
+    add_column :sensor_readings, :timestamp, :datetime
+  end
+end
