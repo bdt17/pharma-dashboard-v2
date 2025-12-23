@@ -1,11 +1,11 @@
-# Secrets
+# FDA 21 CFR Part 11 SECRETS
 .env
-.kamal/secrets
+.kamal/
 config/master.key
-
-# Logs
-log/*
-tmp/*
-
-# FDA Audit Trail (keep)
-*/audit_events.log
+config/credentials.yml.enc
+script/render-env/
+tmp/
+log/
+.DS_Store
+node_modules/
+PharmaMobile/node_modules/
