@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+bundle config set without 'development test'
 bundle install
-# No DB/assets for pharma static dashboards
+bundle exec rails assets:precompile
