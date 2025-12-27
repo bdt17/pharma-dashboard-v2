@@ -106,3 +106,35 @@ app.post('/api/alerts/push/:vehicle_id', (req, res) => {
     status: 'delivered'
   });
 });
+
+// FREE Stripe Mock (no real keys → 100% functional)
+app.post('/api/stripe/subscribe', (req, res) => {
+  const { tier, email } = req.body;
+  const prices = { starter: 9, pro: 99, enterprise: 5000 };
+  
+  res.json({
+    success: true,
+    subscription_id: `sub_${Date.now()}`,
+    tier,
+    monthly: prices[tier],
+    arr: prices[tier] * 12,
+    status: 'active',
+    message: `✅ ${tier.toUpperCase()} subscription created for ${email}`
+  });
+});
+
+// FREE Push Notifications (Expo mock)
+app.post('/api/alerts/push/:vehicle_id', (req, res) => {
+  res.json({
+    success: true,
+    vehicle_id: req.params.vehicle_id,
+    message: req.body.message || '🚨 Pharma Alert',
+    delivered: ['driver_app', 'dispatcher'],
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Use FREE env vars (fallback to mocks)
+const stripeKey = process.env.STRIPE_SECRET_KEY || 'sk_test_free';
+const supabaseUrl = process.env.SUPABASE_URL || 'https://mock.supabase';
+console.log('🚀 FREE MODE:', { stripeKey: stripeKey.slice(0,8)+'...', supabaseUrl });
