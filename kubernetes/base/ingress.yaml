@@ -1,0 +1,47 @@
+# Pharma Transport Ingress - AWS ALB
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pharma-transport-ingress
+  labels:
+    app: pharma-transport
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    # Certificate ARN - replace with actual ACM certificate
+    alb.ingress.kubernetes.io/certificate-arn: "${ACM_CERTIFICATE_ARN}"
+    # Health checks
+    alb.ingress.kubernetes.io/healthcheck-path: /health/ready
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "15"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "5"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    # WebSocket support for ActionCable (1 hour timeout)
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=3600
+    # WAF integration for FDA compliance
+    alb.ingress.kubernetes.io/wafv2-acl-arn: "${WAF_ACL_ARN}"
+    # Security groups
+    alb.ingress.kubernetes.io/security-groups: "${SECURITY_GROUP_IDS}"
+spec:
+  ingressClassName: alb
+  rules:
+    - host: api.pharmatransport.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-transport-web
+                port:
+                  number: 80
+          - path: /cable
+            pathType: Prefix
+            backend:
+              service:
+                name: pharma-transport-cable
+                port:
+                  number: 80

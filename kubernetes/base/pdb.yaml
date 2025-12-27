@@ -1,0 +1,27 @@
+# Pharma Transport Pod Disruption Budgets
+# Ensure high availability during updates
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: pharma-transport-web-pdb
+  labels:
+    app: pharma-transport
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: pharma-transport
+      component: web
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: pharma-transport-sidekiq-pdb
+  labels:
+    app: pharma-transport
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: pharma-transport
+      component: sidekiq

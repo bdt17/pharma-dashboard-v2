@@ -1,0 +1,23 @@
+# Production Overlay
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: pharma-production
+
+resources:
+  - ../../base
+
+patches:
+  - path: patches/deployment-patch.yaml
+  - path: patches/hpa-patch.yaml
+
+configMapGenerator:
+  - name: pharma-transport-config
+    behavior: merge
+    literals:
+      - LOG_LEVEL=info
+      - WEB_CONCURRENCY=4
+
+images:
+  - name: pharma-transport
+    newName: 123456789.dkr.ecr.us-east-1.amazonaws.com/pharma-transport

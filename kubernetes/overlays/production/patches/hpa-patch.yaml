@@ -1,0 +1,8 @@
+# Production HPA patch - higher scale limits
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: pharma-transport-web-hpa
+spec:
+  minReplicas: 5
+  maxReplicas: 50

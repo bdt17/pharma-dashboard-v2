@@ -1,0 +1,32 @@
+# Pharma Transport ConfigMap
+# Non-sensitive configuration values
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pharma-transport-config
+  labels:
+    app: pharma-transport
+data:
+  # Puma/Rails concurrency
+  WEB_CONCURRENCY: "4"
+  RAILS_MAX_THREADS: "5"
+
+  # Sidekiq
+  SIDEKIQ_CONCURRENCY: "10"
+  JOB_CONCURRENCY: "3"
+
+  # Rails
+  RAILS_ENV: "production"
+  RAILS_LOG_TO_STDOUT: "true"
+  RAILS_SERVE_STATIC_FILES: "true"
+  LOG_LEVEL: "info"
+  LOG_FORMAT: "json"
+
+  # FDA 21 CFR Part 11 compliance settings
+  AUDIT_LOG_RETENTION_DAYS: "730"
+  SESSION_TIMEOUT_MINUTES: "30"
+  MAX_LOGIN_ATTEMPTS: "5"
+
+  # GPS streaming configuration (10K events/sec target)
+  GPS_BATCH_SIZE: "1000"
+  GPS_FLUSH_INTERVAL_MS: "100"

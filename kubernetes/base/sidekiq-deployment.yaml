@@ -1,0 +1,74 @@
+# Pharma Transport Sidekiq Worker Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharma-transport-sidekiq
+  labels:
+    app: pharma-transport
+    component: sidekiq
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pharma-transport
+      component: sidekiq
+  template:
+    metadata:
+      labels:
+        app: pharma-transport
+        component: sidekiq
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "7433"
+    spec:
+      serviceAccountName: pharma-transport
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: sidekiq
+          image: pharma-transport:latest
+          command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+          envFrom:
+            - configMapRef:
+                name: pharma-transport-config
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-transport-secrets
+                  key: database-url
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-transport-secrets
+                  key: redis-url
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: pharma-transport-secrets
+                  key: rails-master-key
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - "ps aux | grep -v grep | grep sidekiq"
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - "bundle exec sidekiqctl quiet && sleep 25"

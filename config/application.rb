@@ -6,6 +6,10 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Load middleware before application config
+require_relative '../app/middleware/security_middleware'
+require_relative '../app/middleware/api_key_authenticator'
+
 module PharmaTransportAll
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -23,16 +27,10 @@ module PharmaTransportAll
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-module PharmaTransport
-  class Application < Rails::Application
-    # ... existing config ...
-    
-    config.exceptions_app = self.routes  # ← CORRECT LOCATION
+
+    config.exceptions_app = self.routes
+
+    # Phase 11.5: API Key Authentication Middleware
+    config.middleware.use ApiKeyAuthenticator
   end
 end
-
-
-  end
-end
-require_relative '../app/middleware/security_middleware'
-

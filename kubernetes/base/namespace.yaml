@@ -1,0 +1,9 @@
+# Pharma Transport Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pharma-transport
+  labels:
+    app: pharma-transport
+    compliance: fda-21cfr11
+    istio-injection: enabled

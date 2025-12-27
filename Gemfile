@@ -21,3 +21,11 @@ gem "stripe", "~> 18.1"
 gem "pundit", "~> 2.5"
 
 gem "sidekiq", "~> 8.1"
+
+# Phase 11.5: API Authentication
+gem "bcrypt", "~> 3.1"
+
+# Phase 12: Enterprise Kubernetes
+gem "redis", "~> 5.0"
+gem "hiredis-client", "~> 0.22"
+gem "prometheus-client", "~> 4.2"

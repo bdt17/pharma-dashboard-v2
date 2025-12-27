@@ -1,0 +1,18 @@
+# Production deployment patch - higher resources
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharma-transport-web
+spec:
+  replicas: 5
+  template:
+    spec:
+      containers:
+        - name: web
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "2000m"

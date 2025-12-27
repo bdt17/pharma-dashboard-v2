@@ -1,11 +1,56 @@
 # FDA 21 CFR Part 11 SECRETS
 .env
+.env.*
+!.env.example
 .kamal/
 config/master.key
-config/credentials.yml.enc
 script/render-env/
+
+# Certificates & Keys
+*.pem
+*.key
+*.p12
+*.crt
+
+# Cloud & Infrastructure
+.aws/
+terraform.tfstate*
+*.tfvars
+kubeconfig*
+.kube/
+
+# Database
+*.sqlite3
+*.dump
+*.sql
+
+# Logs & Temp
 tmp/
 log/
+*.log
+storage/
+
+# OS & IDE
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Dependencies
 node_modules/
 PharmaMobile/node_modules/
+vendor/bundle/
+.bundle/
+
+# Test & Coverage
+coverage/
+.rspec_status
+
+# Docker
+docker-compose.override.yml
+*.tar
+
+# Render/Deploy
+.render/

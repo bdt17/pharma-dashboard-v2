@@ -1,0 +1,25 @@
+# Pharma Transport - Kubernetes Base Configuration
+# Phase 12: Enterprise Deployment
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: pharma-transport
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - hpa.yaml
+  - pdb.yaml
+  - sidekiq-deployment.yaml
+
+commonLabels:
+  app: pharma-transport
+  compliance: fda-21cfr11
+
+images:
+  - name: pharma-transport
+    newName: pharma-transport
+    newTag: latest
