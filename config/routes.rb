@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   get '/health/ready', to: 'health#ready'
   get '/health/detailed', to: 'health#detailed'
 
+  # ═══════════════════════════════════════════════════════════════════════════
+  # STRIPE WEBHOOKS - Multi-tenant billing
+  # ═══════════════════════════════════════════════════════════════════════════
+  namespace :stripe do
+    post 'webhooks', to: 'webhooks#create'
+  end
+
   # API ROUTES FIRST - Before React SPA catch-all
   post '/api/forecast/:vehicle_id', to: 'sensors#forecast'
   post '/api/tamper/:vehicle_id', to: 'sensors#tamper'
