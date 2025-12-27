@@ -1,5 +1,4 @@
-# config/puma.rb - Production Render deployment
-
+# Production Render deployment - NO DEMO MODE
 environment ENV.fetch("RAILS_ENV", "production")
 
 workers ENV.fetch("WEB_CONCURRENCY", 2)
