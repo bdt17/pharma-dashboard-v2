@@ -58,18 +58,32 @@ if ENV.fetch("RAILS_ENV", "development") == "production"
       Redis.current.disconnect! rescue nil
     end
 
-    # Log worker boot for FDA audit
-    Rails.logger.info "[Puma] Worker #{Process.pid} booted"
-  end
 
-  on_worker_shutdown do
-    Rails.logger.info "[Puma] Worker #{Process.pid} shutting down"
-  end
+    # Log worker boot for FDA audit
+#    Rails.logger.info "[Puma] Worker #{Process.pid} booted"
+ # end
+
+(logger = Rails.logger || Logger.new($stdout)).info "[Puma] Worker #{Process.pid} booted"
+(logger = Rails.logger || Logger.new($stdout)).info "[Puma] Worker #{Process.pid} shutting down"
+  
+
+
+#on_worker_shutdown do
+ #   Rails.logger.info "[Puma] Worker #{Process.pid} shutting down"
+  #end
 
   # Phased restarts for zero-downtime deploys
-  on_restart do
-    Rails.logger.info "[Puma] Master process restarting"
-  end
+ 
+# on_restart do
+ #   Rails.logger.info "[Puma] Master process restarting"
+  #end
+
+on_restart do
+  (Rails.logger || Logger.new($stdout)).info "[Puma] Master process restarting"
+end
+
+
+
 end
 
 # =============================================================================
