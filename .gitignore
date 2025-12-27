@@ -54,3 +54,7 @@ docker-compose.override.yml
 
 # Render/Deploy
 .render/
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
