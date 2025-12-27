@@ -1,6 +1,10 @@
-# This file is used by Rack-based servers to start the application.
-
-require_relative "config/environment"
-
-run Rails.application
-Rails.application.load_server
+require 'rack'
+run Rack::Builder.new do
+  use Rack::Static, 
+    urls: ['/'], 
+    root: 'public',
+    index: 'index.html'
+  run ->(env) { 
+    [200, {'Content-Type' => 'text/html'}, [File.read('public/index.html', nil) || 'Pharma LIVE!']]
+  }
+end
