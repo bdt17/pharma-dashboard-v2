@@ -4,5 +4,6 @@ set -e
 bundle config set --local without 'development test'
 bundle install
 
-# Rails 8 + Render: Safe DB setup
-bin/rails db:create db:migrate
+# Rails 8 Render: Safe migration (skip duplicates)
+bin/rails db:migrate:status || true
+bin/rails db:migrate
