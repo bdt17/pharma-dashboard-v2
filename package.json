@@ -1,15 +1,4 @@
 {
   "name": "pharma-transport",
-  "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5"
-  },
-  "engines": {
-    "node": "20.17.0"
-  }
+  "dependencies": {"express": "^4.19.2"}
 }
