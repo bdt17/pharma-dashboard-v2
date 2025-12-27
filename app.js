@@ -1,3 +1,9 @@
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use(express.static('public'));
+
+// HTML ROOT (Pfizer Enterprise Design)
 app.get('/', (req, res) => {
   res.send(`
 <!DOCTYPE html>
@@ -51,4 +57,37 @@ app.get('/', (req, res) => {
   </div>
 </body>
 </html>`);
+});
+
+// GPS API
+app.get('/api/gps/:id', (req, res) => {
+  res.json({
+    id: req.params.id,
+    lat: 33.4484,
+    lon: -112.0740,
+    city: 'Phoenix AZ',
+    status: 'LIVE',
+    trucks: 207,
+    arr: '8M'
+  });
+});
+
+// Status API
+app.get('/api/status', (req, res) => {
+  res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
+});
+
+// Forecast API
+app.post('/api/forecast/:id', (req, res) => {
+  res.json({ forecast: { predicted_temp: 10.6 }, status: 'OK' });
+});
+
+// Tamper API
+app.post('/api/tamper', (req, res) => {
+  res.json({ status: '🚨 ALERT', vibration: req.body.vibration || 0 });
+});
+
+const port = process.env.PORT || 10000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`🚀 Pharma LIVE on port ${port}`);
 });
