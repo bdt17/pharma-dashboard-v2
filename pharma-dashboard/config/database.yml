@@ -1,16 +1,16 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: pharma-db
-  username: postgres
-  password: password
-  database: pharma_development
+  timeout: 5000
 
 development:
   <<: *default
-  database: pharma_dashboard_development
-  username: postgres
-  password: K7mP9xQ2rF4v
-  host: localhost  #n changed 
-  port: 5432
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3
