@@ -1,115 +1,54 @@
-# frozen_string_literal: true
+require 'faker'
 
-# =============================================================================
-# Database Seeds - Pharma Transport
-# =============================================================================
-# FDA 21 CFR Part 11 Compliant | Stripe Live Mode Ready
-#
-# Run: rails db:seed
-# =============================================================================
+puts "🌱 Seeding Pharma Transport database..."
 
-puts "[Seeds] Starting database seeding..."
+# Clear existing data
+User.delete_all
+Shipment.delete_all
+Alert.delete_all
+SensorReading.delete_all rescue nil
 
-# =============================================================================
-# DEMO TENANT
-# =============================================================================
-puts "[Seeds] Creating demo tenant..."
+# Admin user
+User.create!(
+  email: 'admin@pharmatransport.com',
+  password: 'password123',
+  password_confirmation: 'password123',
+  role: 'admin'
+)
+puts "✅ Admin created"
 
-demo_tenant = Tenant.find_or_create_by!(subdomain: "demo") do |t|
-  t.name = "Demo Cold Chain Inc."
-  t.status = "active"
-  t.plan = "smb"
-  t.subscription_status = "active"
-  t.billing_email = "demo@pharmatransport.io"
+# 20 shipments with realistic pharma data
+20.times do |i|
+  Shipment.create!(
+    tracking_number: "PHARMA#{rand(100000..999999)}",
+    origin: Faker::Address.city,
+    destination: Faker::Address.city,
+    status: %w[active in_transit delivered delayed].sample,
+    temperature_setpoint: rand(2.0..8.0).round(1)
+  )
 end
+puts "✅ 20 shipments created"
 
-puts "[Seeds] Demo tenant: #{demo_tenant.id} (#{demo_tenant.subdomain})"
+# 500 sensor readings
+500.times { |i| 
+  SensorReading.create!(
+    shipment_id: Shipment.pluck(:id).sample,
+    temperature: rand(-2.0..12.0).round(2),
+    humidity: rand(20..80),
+    timestamp: rand(1.week.ago..Time.current)
+  ) 
+}
+puts "✅ 500 sensor readings created"
 
-# =============================================================================
-# ADMIN USER
-# =============================================================================
-puts "[Seeds] Creating admin user..."
-
-admin_user = User.find_or_create_by!(email: "admin@pharmatransport.io") do |u|
-  u.tenant = demo_tenant
-  u.password_digest = BCrypt::Password.create("SecureAdmin123!")
-  u.role = "admin"
-  u.active = true
+# 15 alerts
+15.times do
+  Alert.create!(
+    shipment_id: Shipment.pluck(:id).sample,
+    alert_type: %w[temp humidity gps].sample,
+    severity: %w[low medium high].sample,
+    message: "Alert: #{rand(10..20)}°C excursion"
+  )
 end
+puts "✅ 15 alerts created"
 
-puts "[Seeds] Admin user: #{admin_user.id} (#{admin_user.email})"
-
-# =============================================================================
-# API KEY
-# =============================================================================
-puts "[Seeds] Creating demo API key..."
-
-api_key = ApiKey.find_or_create_by!(tenant: demo_tenant, name: "Demo API Key") do |k|
-  k.active = true
-  k.permissions = { read: true, write: true }
-end
-
-puts "[Seeds] API Key: #{api_key.key_prefix}..."
-
-# =============================================================================
-# SAMPLE SHIPMENTS
-# =============================================================================
-puts "[Seeds] Creating sample shipments..."
-
-3.times do |i|
-  shipment = Shipment.find_or_create_by!(
-    tenant: demo_tenant,
-    tracking_number: "PFZ-DEMO-#{1000 + i}"
-  ) do |s|
-    s.origin = ["Indianapolis, IN", "Memphis, TN", "Louisville, KY"][i]
-    s.destination = ["Boston, MA", "New York, NY", "Philadelphia, PA"][i]
-    s.status = ["in_transit", "delivered", "in_transit"][i]
-    s.temperature_min = 2.0
-    s.temperature_max = 8.0
-    s.cargo_type = "vaccine"
-  end
-
-  # Temperature events
-  if shipment.status == "in_transit"
-    5.times do |j|
-      TemperatureEvent.create!(
-        tenant: demo_tenant,
-        shipment: shipment,
-        temperature: rand(3.0..6.0).round(2),
-        humidity: rand(40.0..60.0).round(1),
-        recorded_at: j.hours.ago,
-        excursion: false
-      )
-    end
-  end
-
-  puts "[Seeds] Shipment: #{shipment.tracking_number} (#{shipment.status})"
-end
-
-# =============================================================================
-# AUDIT LOG ENTRY
-# =============================================================================
-puts "[Seeds] Creating initial audit event..."
-
-AuditLog.log(
-  tenant: demo_tenant,
-  action: "system.database_seeded",
-  resource: demo_tenant,
-  user: admin_user,
-  metadata: {
-    source: "db/seeds.rb",
-    timestamp: Time.current.utc.iso8601,
-    environment: Rails.env
-  }
-) rescue nil # Skip if AuditLog not ready
-
-puts "[Seeds] Database seeding complete!"
-puts ""
-puts "=" * 60
-puts "DEMO CREDENTIALS"
-puts "=" * 60
-puts "Tenant:    demo"
-puts "Email:     admin@pharmatransport.io"
-puts "Password:  SecureAdmin123!"
-puts "API Key:   #{api_key&.key_prefix}... (see rails console)"
-puts "=" * 60
+puts "🎉 All dashboard data seeded!"
