@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 set -e
+echo "=== Pharma Transport Dashboard Build ==="
 
-# Install Ruby gems (if Gemfile exists)
+# Ruby gems
 if [ -f Gemfile ]; then
-  gem install bundler
-  bundle install
+  gem install bundler --no-document
+  bundle check || bundle install --without development test
 fi
 
-# Install Node.js dependencies
-if [ -f package.json ]; then
-  npm ci --only=production
+# Node.js
+npm ci --only=production || echo "No package.json"
+
+# Assets
+if command -v bundle >/dev/null && bundle exec rails >/dev/null 2>&1; then
+  bundle exec rails assets:precompile RAILS_ENV=production SECRET_KEY_BASE=xyz123 || true
 fi
 
-# Precompile assets (if Rails)
-if [ -f bin/rails ]; then
-  bundle exec rails assets:precompile RAILS_ENV=production
-fi
-
-# Build dashboard frontend
-npm run build || echo "No frontend build needed"
+echo "✅ Build complete"

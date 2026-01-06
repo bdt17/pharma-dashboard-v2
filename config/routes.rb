@@ -136,3 +136,10 @@ Rails.application.routes.draw do
     end
   end
 end
+
+# Dashboard API v2
+namespace :api do
+  namespace :v1 do
+    get '/dashboard', to: 'dashboard#index'
+  end
+end
