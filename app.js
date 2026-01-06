@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -100,7 +100,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -122,7 +122,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -149,7 +149,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -164,7 +164,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -179,7 +179,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -192,7 +192,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -207,7 +207,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -222,7 +222,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
@@ -237,7 +237,7 @@ app.get("/", (req, res) => {
     login: "/api/auth/test-login",
     dashboard: "/api/v1/dashboard",
     status: "/api/status",
-    credentials: {username: "testuser", password: "Pharma2026!"},
+    credentials: {username: "testuser", password: "process.env.PASS || "secure2026""},
     docs: "https://pharmatransport.org/"
   });
 });
