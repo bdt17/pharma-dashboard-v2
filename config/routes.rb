@@ -123,3 +123,9 @@ get '/trackings', to: 'trackings#index'
 get '/sensors/:id/live', to: 'sensors#live'
 get '/pharma/status', to: 'pharma#status'
 get '/audits/:shipment_id', to: 'audits#shipment_log'
+mount ActionCable.server => '/cable'
+namespace :api do
+  namespace :v1 do
+    get 'dashboard', to: 'dashboard#index'
+  end
+end
