@@ -71,6 +71,27 @@ app.get('/api/gps/:id', (req, res) => {
     arr: '8M'
   });
 });
+// PHARMA DASHBOARD API v2 - ADD HERE (before status API)
+app.get('/api/v1/dashboard', (req, res) => {
+  res.json({
+    timestamp: new Date().toISOString(),
+    active_shipments: 23,
+    exceptions_open: 4,
+    otif_percent: 96.8,
+    co2_month_kg: 1250.5,
+    temp_excursions: 2,
+    vendors: [
+      {name: "UPS Pharma", otif: 98.2},
+      {name: "FedEx Clinical", otif: 95.6}
+    ],
+    status: "FDA Pharma Dashboard v2 LIVE"
+  });
+});
+
+// Status API (keep existing)
+app.get('/api/status', (req, res) => {
+  res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
+});
 
 // Status API
 app.get('/api/status', (req, res) => {
