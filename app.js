@@ -1,10 +1,40 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
 app.use(express.static('public'));
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
 
 // HTML ROOT (Pfizer Enterprise Design)
 app.get('/', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.send(`
 <!DOCTYPE html>
 <html>
@@ -61,6 +91,16 @@ app.get('/', (req, res) => {
 
 // GPS API
 app.get('/api/gps/:id', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({
     id: req.params.id,
     lat: 33.4484,
@@ -73,6 +113,16 @@ app.get('/api/gps/:id', (req, res) => {
 });
 // PHARMA DASHBOARD API v2 - ADD HERE (before status API)
 app.get('/api/v1/dashboard', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({
     timestamp: new Date().toISOString(),
     active_shipments: 23,
@@ -90,33 +140,103 @@ app.get('/api/v1/dashboard', (req, res) => {
 
 // Status API (keep existing)
 app.get('/api/status', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
 });
 
 
 // 🔥 ADD THE 3 LINES HERE 🔥 (RIGHT BEFORE app.listen(10000))
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
 const testAuth = require('./setup-test-user.js');
 testAuth.ensureTestUser(); 
 testAuth.setupTestLogin(app);
 
 // app.listen(10000, () => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
 
 // Status API
 app.get('/api/status', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
 });
 
 // Forecast API
 app.post('/api/forecast/:id', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({ forecast: { predicted_temp: 10.6 }, status: 'OK' });
 });
 
 // Tamper API
 app.post('/api/tamper', (req, res) => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   res.json({ status: '🚨 ALERT', vibration: req.body.vibration || 0 });
 });
 
 const port = process.env.PORT || 10000;
 app.listen(port, '0.0.0.0', () => {
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard",
+    status: "/api/status",
+    credentials: {username: "testuser", password: "Pharma2026!"},
+    docs: "https://pharmatransport.org/"
+  });
+});
   console.log(`🚀 Pharma LIVE on port ${port}`);
 });
