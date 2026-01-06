@@ -1,3 +1,4 @@
+get 'dashboard', to: 'dashboard#index'
 Rails.application.routes.draw do
   # Health checks first
   get '/health/live', to: 'health#live'
