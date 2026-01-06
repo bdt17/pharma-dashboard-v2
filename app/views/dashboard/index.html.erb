@@ -1,6 +1,35 @@
-<div id="dashboard-app" 
-     data-audits="<%= @audit_entries.to_json %>"
-     data-shipments="<%= @recent_shipments.to_json %>">
-  <div class="loading">Pharma Transport FDA Dashboard</div>
-  <p>Audit trail ready: <%= @audit_entries.count %> entries</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pharma Transport Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= csrf_meta_tags %>
+  <style>
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .loading { text-align: center; padding: 4rem; font-size: 1.2rem; color: #666; }
+    h1 { color: #1e40af; margin-bottom: 1rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-card { background: #f8fafc; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #1e40af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Pharma Transport Dashboard</h1>
+    <p>FDA 21 CFR Part 11 Compliant | Audit Trail: <%= @audit_entries.count %> entries</p>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <h3>Audit Entries</h3>
+        <strong><%= @audit_entries.count %></strong>
+      </div>
+      <div class="stat-card">
+        <h3>Active Shipments</h3>
+        <strong><%= @recent_shipments.count %></strong>
+      </div>
+    </div>
+    
+    <div id="dashboard-root" class="loading">Loading analytics...</div>
+  </div>
+</body>
+</html>
