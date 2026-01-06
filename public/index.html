@@ -1,25 +1,106 @@
-<!DOCTYPE html>
+y<!DOCTYPE html>
 <html>
 <head>
 <title>🚚 Pharma Transport Dashboard</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;margin:0;padding:20px}
-.container{max-width:1200px;margin:auto;background:white;border-radius:20px;padding:30px;box-shadow:0 20px 40px rgba(0,0,0,0.1)}
-h1{font-size:2.5em;color:#1a1a1a;text-align:center;margin-bottom:10px}
-.subtitle{color:#666;text-align:center;margin-bottom:40px;font-size:1.2em}
-.card{background:#f8f9fa;border-radius:15px;padding:25px;margin:15px 0;transition:transform 0.3s;box-shadow:0 5px 15px rgba(0,0,0,0.08)}
-.card:hover{transform:translateY(-5px)}
-.metric{font-size:2.5em;font-weight:700;color:#2d3748;margin:10px 0}
-.green{color:#48bb78}
-.red{color:#f56565}
-.blue{color:#4299e1}
-.vendor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.status-badge{padding:8px 16px;border-radius:25px;font-weight:600;display:inline-block}
-.live{background:#48bb78;color:white}
-button{padding:12px 24px;background:#4299e1;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;transition:background 0.3s}
-button:hover{background:#3182ce}
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #FFFFFF; /* Pure White background */
+  color: #565759; /* Mid Grey text */
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(86,87,89,0.1); /* Subtle Mid Grey shadow */
+  border: 1px solid #C0BEC6 /* Light Variant border */
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #0984C0; /* Primary Blue */
+  text-align: center;
+  margin-bottom: 10px
+}
+
+.subtitle {
+  color: #565759; /* Mid Grey */
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 1.2em
+}
+
+.card {
+  background: #FFFFFF;
+  border: 1px solid #C0BEC6; /* Light Variant */
+  border-radius: 15px;
+  padding: 25px;
+  margin: 15px 0;
+  transition: all 0.3s;
+  box-shadow: 0 5px 15px rgba(170,167,176,0.1) /* Accent Silver shadow */
+}
+
+.card:hover {
+  box-shadow: 0 10px 25px rgba(170,167,176,0.2);
+  border-color: #60BDD1 /* Lighter Blue hover */
+}
+
+.metric {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #565759; /* Mid Grey */
+  margin: 10px 0
+}
+
+.primary-blue { color: #0984C0 }
+.success-green { color: #0984C0 } /* Using Primary Blue for success */
+.warning-red { color: #565759 }
+.blue-accent { color: #60BDD1 }
+.silver-border { border-color: #AAA7B0 }
+
+button {
+  padding: 12px 24px;
+  background: #0984C0; /* Primary Blue */
+  color: white;
+  border: 1px solid #C0BEC6;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s
+}
+
+button:hover {
+  background: #60BDD1; /* Lighter Blue */
+  box-shadow: 0 5px 15px rgba(9,132,192,0.3)
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-block;
+  background: #0984C0;
+  color: white;
+  border: 1px solid #C0BEC6
+}
+
+.vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px
+}
+</style>
+
+
 </style>
 </head>
 <body>
@@ -34,23 +115,6 @@ button:hover{background:#3182ce}
 </div>
 
 <div id="login-status" class="card" style="background:#e2e8f0">Click "Load Metrics" to begin...</div>
-<div id="dashboard" style="display:none">
-<div class="card">
-<h2>📈 Key Performance Indicators</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
-<div id="active-shipments" class="metric"></div>
-<div id="otif" class="metric"></div>
-<div id="co2" class="metric"></div>
-<div id="exceptions" class="metric"></div>
-</div>
-</div>
-<div class="card">
-<h2>🌡️ Temperature Compliance</h2>
-<div id="temp-excursions" class="metric"></div>
-</div>
-<div class="card">
-<h2>📦 Vendor Performance</h2>
-<div id="vendors" class="vendor-grid"></div>
 </div>
 </div>
 </div>
@@ -97,3 +161,38 @@ async function loadDashboard(){
 </script>
 </body>
 </html>
+<div id="dashboard" style="display:none">
+<div class="card">
+<h2>📈 Key Performance Indicators</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+<div id="active-shipments" class="metric"></div>
+<div id="otif" class="metric"></div>
+<div id="co2" class="metric"></div>
+<div id="exceptions" class="metric"></div>
+</div>
+</div>
+<div class="card">
+<h2>🌡️ Temperature Compliance</h2>
+<div id="temp-excursions" class="metric"></div>
+</div>
+<div class="card">
+<h2>📦 Vendor Performance</h2>
+<div id="vendors" class="vendor-grid"></div>
+</div>
+<div id="realtime" class="card" style="display:none">
+<h2>🛰️ Real-Time Shipments (Phoenix Metro)</h2>
+<div id="gps-markers" class="vendor-grid"></div>
+</div>
+<div id="audit" class="card" style="display:none">
+<h2>📋 FDA 21 CFR Part 11 Audit Trail</h2>
+<div id="audit-log"></div>
+</div>
+<div id="alerts" class="card" style="display:none">
+<h2>🌡️ Temperature Compliance Alerts</h2>
+<div id="temp-alerts"></div>
+</div>
+<div id="vendors-detail" class="card" style="display:none">
+<h2>📦 Vendor Performance Drilldown</h2>
+<div id="vendor-details"></div>
+</div>
+</div>
