@@ -93,6 +93,14 @@ app.get('/api/status', (req, res) => {
   res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
 });
 
+
+// 🔥 ADD THE 3 LINES HERE 🔥 (RIGHT BEFORE app.listen(10000))
+const testAuth = require('./setup-test-user.js');
+testAuth.ensureTestUser(); 
+testAuth.setupTestLogin(app);
+
+// app.listen(10000, () => {
+
 // Status API
 app.get('/api/status', (req, res) => {
   res.json({ live: '🚀 Pharma 8M ARR LIVE', trucks: 207, phase: 14 });
