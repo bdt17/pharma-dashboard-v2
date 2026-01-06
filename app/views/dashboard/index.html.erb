@@ -1,0 +1,6 @@
+<div id="dashboard-app" 
+     data-audits="<%= @audit_entries.to_json %>"
+     data-shipments="<%= @recent_shipments.to_json %>">
+  <div class="loading">Pharma Transport FDA Dashboard</div>
+  <p>Audit trail ready: <%= @audit_entries.count %> entries</p>
+</div>
