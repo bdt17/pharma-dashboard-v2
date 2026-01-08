@@ -1,0 +1,14 @@
+config:
+  target: 'https://pharmatransport.org'
+  phases:
+    - duration: 300
+      arrivalRate: 100  # 100 new users/sec → 30K total
+scenarios:
+  - flow:
+    - get:
+       url: "/api/v1/dashboard"
+    - post:
+       url: "/api/auth/test-login"
+       json:
+         username: "testuser"
+         password: "Pharma2026!"

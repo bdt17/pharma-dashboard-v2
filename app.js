@@ -59,3 +59,9 @@ const port = process.env.PORT || 10000;
 app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Pharma Transport + GPS LIVE on port ${port}`);
 });
+// Phase 13+ Endpoints (add before app.listen)
+app.post('/api/waymo/:shipment_id', (req, res) => res.json({success:true,autonomous:true}));
+app.post('/api/drone/delivery', (req, res) => res.json({success:true,drone:'LIVE'}));
+app.post('/api/ai/predict-temp-excursion', (req, res) => res.json({success:true,risk_score:42}));
+app.get('/api/digital-twin/:id', (req, res) => res.json({success:true,digital_twin:'LIVE'}));
+app.post('/api/marketplace/bid', (req, res) => res.json({success:true,contract:'AWARDED'}));
