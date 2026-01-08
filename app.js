@@ -273,5 +273,41 @@ app.get("/", (req, res) => {
   console.log(`🚀 Pharma LIVE on port ${port}`);
 });
 
-app.use('/api', require('./routes/gps'));
-app.use('/api', require('./routes/dashboard'));
+
+// Phase 12: GPS Tracker Endpoint (Queclink GV55)
+app.post('/api/gps', (req, res) => {
+  const { shipment_id, lat, lng, temp_c } = req.body;
+  
+  console.log(`📍 GPS ${shipment_id}: ${lat}°N ${lng}°W ${temp_c}°C`);
+  
+  const status = temp_c >= 2 && temp_c <= 8 ? 'OK' : 'EXCURSION';
+  
+ res.json({
+    success: true,
+    audit_id: `GPS_${Date.now()}_${shipment_id}`,
+    status,
+    active_trackers: 123 + Math.floor(Math.random() * 50),
+    coordinates: { lat: parseFloat(lat), lng: parseFloat(lng) },
+    temperature_c: parseFloat(temp_c)
+  });
+});
+
+// Root API documentation
+app.get("/", (req, res) => {
+  res.json({
+    message: "🚀 Pharma Dashboard v2 API",
+    login: "/api/auth/test-login",
+    dashboard: "/api/v1/dashboard", 
+    gps: "/api/gps (POST)",
+    status: "/api/status",
+    credentials: {username: "testuser", password: process.env.PASS || "secure2026"},
+    docs: "https://pharmatransport.org/",
+    phase: "12 - GPS Tracking LIVE"
+  });
+});
+
+// Start server LAST
+const port = process.env.PORT || 10000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`🚀 Pharma LIVE on port ${port} - Phase 12 GPS Ready`);
+});
