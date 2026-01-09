@@ -86,6 +86,21 @@ app.get('/api/digital-twin/:shipment_id', (req, res) => {
   });
 });
 
+
+
+// ===== FORCE ENGLISH - Kill Russian localization =====
+app.use((req, res, next) => {
+  req.headers['accept-language'] = 'en-US,en;q=0.9';
+  next();
+});
+
+// ===== CORE APIs =====
+app.get('/api/v1/dashboard', (req, res) => {
+
+
+
+
+
 // ===== CORE APIs =====
 app.get('/api/v1/dashboard', (req, res) => {
   res.json({
