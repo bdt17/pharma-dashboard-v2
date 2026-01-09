@@ -63,3 +63,5 @@ docker-compose.override.yml
 logs/
 .env
 logs/
+
+/lib/generated/prisma

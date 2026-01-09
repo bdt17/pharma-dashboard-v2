@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url line DELETED for Prisma 7
+}
+
+model Shipment {
+  id          String   @id @default(uuid())
+  shipment_id String   @unique
+  carrier     String
+  status      String
+  lat         Float?
+  lng         Float?
+  temp_c      Float
+  otif_score  Float
+  created_at  DateTime @default(now())
+  
+  @@map("shipments")
+}

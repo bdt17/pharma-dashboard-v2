@@ -1,0 +1,23 @@
+Subject: RFQ - 500x Queclink GV55 GPS Trackers (Pharma Transport)
+
+Dear [VENDOR],
+
+Pharma Transport requires 500x Queclink GV55 GPS trackers for FDA-compliant 
+pharma logistics (2-8°C cold chain).
+
+Requirements:
+- 500 units Queclink GV55 (4G LTE)
+- US delivery (Phoenix AZ 85008)
+- Lead time <14 days  
+- Full kit: tracker + antennas + cables + manuals
+- FDA 21 CFR Part 11 validation docs
+- Pricing: $XX/unit (500 units)
+
+Current best quote: $69/unit (TrackingTheWorld)
+Please confirm pricing/lead time by EOD.
+
+Best,
+Brett Thomas
+Pharma Transport Enterprise
+brett.thomas29.97@gmail.com
+34.140.39.78 (production APIs LIVE)
