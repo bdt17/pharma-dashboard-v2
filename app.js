@@ -2,6 +2,20 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+
+
+// ===== FORCE ENGLISH - Kill Russian (MUST BE FIRST) =====
+app.use((req, res, next) => {
+  req.headers['accept-language'] = 'en-US,en;q=0.9';
+  next();
+});
+
+// ===== PHASE 12 GPS TRACKER (Queclink GV55) =====
+app.post('/api/gps', (req, res) => {
+
+
+
+
 // ===== PHASE 12 GPS TRACKER (Queclink GV55) =====
 app.post('/api/gps', (req, res) => {
   const { shipment_id, lat, lng, temp_c } = req.body;
@@ -85,20 +99,6 @@ app.get('/api/digital-twin/:shipment_id', (req, res) => {
     digital_twin_id: 'DT-PHX-TRK001'
   });
 });
-
-
-
-// ===== FORCE ENGLISH - Kill Russian localization =====
-app.use((req, res, next) => {
-  req.headers['accept-language'] = 'en-US,en;q=0.9';
-  next();
-});
-
-// ===== CORE APIs =====
-app.get('/api/v1/dashboard', (req, res) => {
-
-
-
 
 
 // ===== CORE APIs =====
